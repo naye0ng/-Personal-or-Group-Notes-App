@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+
+{% load bootstrap4 %}
+
+{% block body %}
+<div class="container">
+    <form method='POST' >
+    {% csrf_token %}
+    {% bootstrap_form form %}
+    <button type='submit' class='btn btn-primary'>등록</button>
+    </form>  
+</div>
+{% endblock body %}
