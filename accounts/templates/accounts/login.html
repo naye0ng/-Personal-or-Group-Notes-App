@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+
+{% load bootstrap4 %}
+
+{% block body %}
+<div class="row">
+    <div class="col-lg-6">
+        <!-- TODO : 메모장 미리보기 -->
+    </div>
+    <div class="col-lg-6">
+        <form method='POST'>
+            {% csrf_token %}
+            <!-- 모델 폼 -->
+            {% bootstrap_form form %}
+            <button type='submit' class='btn btn-primary'>로그인</button>
+          </form>
+    </div>
+</div>
+{% endblock body %}
