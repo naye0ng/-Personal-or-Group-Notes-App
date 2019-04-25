@@ -8,7 +8,6 @@
     <section class="card-columns">
     {% for memo in memos %}
         <div class="card gradient-border">
-            <!-- <img alt="Card image cap" class="card-img-top img-fluid" src="https://www.fillmurray.com/411/200"> -->
             <div class="card-body">
                 <div class="row">
                     <div class="col-9">
@@ -16,14 +15,20 @@
                         <p class="card-subtitle mb-2 text-muted">{{ memo.updated_at }}</p>
                         <p class="card-subtitle mb-2 text-muted">{{ memo.user }}님의 글</p>
                     </div>
-                    <div class="col-3 text-center like-field">
-                        <i class="far fa-heart"></i>
-                        <p class="">좋아요 {{ memu.like_users.count }}개</p>
+                    <div class="col-3 text-center like-field pt-1">
+                        <a href="{% url 'memos:like' memo.id %}">
+                            {% if user in memo.like_users.all %}
+                            <i class="fas fa-heart"></i>
+                            {% else %}
+                            <i class="far fa-heart"></i>
+                            {% endif %}
+                        </a>
+                        <p class="pt-1">좋아요 {{ memo.like_users.count }}개</p>
                     </div>
                 </div>
                 <!-- <span class="badge badge-warning">Health</span> -->
                 <p class="card-text">{{ memo.content }}</p>
-
+                {% if user == memo.user %}
                 <div class="card-btn">
                     <a href="{% url 'memos:update' memo.id %}" class="btn btn-outline-secondary btn-sm">수정</a>
                     <form action="{% url 'memos:delete' memo.id %}" method="POST" class="d-inline">
@@ -31,6 +36,7 @@
                         <input type="submit" class="btn btn-outline-secondary btn-sm" value="삭제">
                     </form>
                 </div>
+                {% endif %}
             </div>
         </div>
     {% endfor %}
