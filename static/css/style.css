@@ -1,11 +1,11 @@
 html, body {
     height: 100vh;
-    background-color: #f6f6f6!important;
+    background-color: #f6f6f6;
 }
 .card {
-    background-color: white;
+    background: #ffffff;
     box-shadow: 0 6px 15px rgba(36,37,38,0.08);
-    border-radius: 16px;
+    border-radius: 16px!important;
     transition: box-shadow 0.25s ease, transform 0.25s ease;
 }
 
@@ -19,6 +19,23 @@ html, body {
     margin-right: 30px;
     margin-bottom: 50px;
 }
+.card-title{
+    font-size:20px;
+}
+.card-subtitle{
+    font-size:15px;
+}
+
+.like-field p{
+    font-size: 12px;
+}
+.like-field i{
+    color: #c43a30;
+}
+
+.card-btn {
+    text-align: right;
+}
   
 @media screen and (max-width: 1170px) {
     .preview-card{
@@ -27,5 +44,6 @@ html, body {
 }
 
 .h-fix{
-    height : calc(100vh - 56px - 5vh);
+    height : calc(100vh - 120px - 5vh);
 }
+

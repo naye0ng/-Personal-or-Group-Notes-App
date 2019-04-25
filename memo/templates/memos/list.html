@@ -14,6 +14,7 @@
                     <div class="col-9">
                         <h5 class="card-title">{{ memo.title }}</h5>
                         <p class="card-subtitle mb-2 text-muted">{{ memo.updated_at }}</p>
+                        <p class="card-subtitle mb-2 text-muted">{{ memo.user }}님의 글</p>
                     </div>
                     <div class="col-3 text-center like-field">
                         <i class="far fa-heart"></i>
@@ -22,9 +23,13 @@
                 </div>
                 <!-- <span class="badge badge-warning">Health</span> -->
                 <p class="card-text">{{ memo.content }}</p>
+
                 <div class="card-btn">
-                    <a href="#" class="btn btn-outline-secondary btn-sm">수정</a>
-                    <a href="#" class="btn btn-outline-secondary btn-sm">삭제</a>
+                    <a href="{% url 'memos:update' memo.id %}" class="btn btn-outline-secondary btn-sm">수정</a>
+                    <form action="{% url 'memos:delete' memo.id %}" method="POST" class="d-inline">
+                        {% csrf_token %}
+                        <input type="submit" class="btn btn-outline-secondary btn-sm" value="삭제">
+                    </form>
                 </div>
             </div>
         </div>

@@ -25,3 +25,24 @@ def create(request) :
         'form' :form,
     }
     return render(request,'memos/create.html', content)
+
+@login_required
+def update(request, memo_id):
+    memo = get_object_or_404(Memo, pk=memo_id)
+    if request.method == 'POST' :
+        form = MemoForm(request.POST, instance=memo)
+        if form.is_valid() :
+            form.save()
+            return redirect('memos:list')
+    form = MemoForm(instance=memo)
+    content = {
+        'form' :form,
+    }
+    return render(request,'memos/update.html',content)
+
+@login_required
+def delete(request,memo_id) :
+    memo = get_object_or_404(Memo,pk=memo_id)
+    if request.method == 'POST' :
+        memo.delete()
+    return redirect('memos:list')
