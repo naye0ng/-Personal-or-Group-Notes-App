@@ -3,7 +3,7 @@
 }
 html, body {
     height: 100vh;
-    /* background-color: #f6f6f6; */
+    background-color: #f6f6f6;
 }
 
 .container {
@@ -51,6 +51,7 @@ a.navbar-brand {
     height: 100%;
     background-color: #f6f6f6;
 }
+
 .memo-title>img{
     width:55px;
 }

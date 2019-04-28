@@ -5,12 +5,14 @@
 {% block body %}
 <!-- 조회 및 설명 -->
 <section id='memo-list-info-section'>
-    <div class="container text-center">
-        <div class="memo-title">
+    <div class="container h-100 d-flex justify-content-center align-items-center">
+    <div class="row text-center">
+        <div class="memo-title col-12">
             <img src="{% static 'image/memologo.png' %}" alt="" />
-            <p>카드 메모장<br>(CARD MEMO)</p>
+            <br>
+            <br>
         </div>
-        <div class="memo-description">
+        <div class="memo-description col-12">
             <p>
                 자유롭게 메모하고 공유하세요! 
                 <br>
@@ -22,9 +24,13 @@
                 You can write notes for individuals, organizations, and anonymous people.
             </p>
         </div>
-        <div class="memo-share-btn">
-            
+        <div class="memo-share-btn col-12">
+            <br>
+            <br>
+            <!-- Place this tag where you want the button to render. -->
+            <a class="github-button" href="https://github.com/naye0ng/Personal-or-Group-Notes-App" aria-label="Star naye0ng/Personal-or-Group-Notes-App on GitHub">Star</a>
         </div>
+    </div>
     </div>
 </section>
 <!-- card section -->
