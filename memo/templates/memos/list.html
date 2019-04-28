@@ -1,45 +1,90 @@
 {% extends "base.html" %}
 
+{% load static %}
+
 {% block body %}
-<div class="container">
-    <section>
-        <!-- 조회 -->
-    </section>
-    <section class="card-columns">
-    {% for memo in memos %}
-        <div class="card gradient-border">
-            <div class="card-body">
-                <div class="row">
-                    <div class="col-9">
-                        <h5 class="card-title">{{ memo.title }}</h5>
-                        <p class="card-subtitle mb-2 text-muted">{{ memo.updated_at }}</p>
-                        <p class="card-subtitle mb-2 text-muted">{{ memo.user }}님의 글</p>
-                    </div>
-                    <div class="col-3 text-center like-field pt-1">
-                        <a href="{% url 'memos:like' memo.id %}">
-                            {% if user in memo.like_users.all %}
-                            <i class="fas fa-heart"></i>
-                            {% else %}
-                            <i class="far fa-heart"></i>
-                            {% endif %}
-                        </a>
-                        <p class="pt-1">좋아요 {{ memo.like_users.count }}개</p>
-                    </div>
-                </div>
-                <!-- <span class="badge badge-warning">Health</span> -->
-                <p class="card-text">{{ memo.content }}</p>
-                {% if user == memo.user %}
-                <div class="card-btn">
-                    <a href="{% url 'memos:update' memo.id %}" class="btn btn-outline-secondary btn-sm">수정</a>
-                    <form action="{% url 'memos:delete' memo.id %}" method="POST" class="d-inline">
-                        {% csrf_token %}
-                        <input type="submit" class="btn btn-outline-secondary btn-sm" value="삭제">
-                    </form>
-                </div>
-                {% endif %}
-            </div>
+<!-- 조회 및 설명 -->
+<section id='memo-list-info-section'>
+    <div class="container text-center">
+        <div class="memo-title">
+            <img src="{% static 'image/memologo.png' %}" alt="" />
+            <p>카드 메모장<br>(CARD MEMO)</p>
         </div>
-    {% endfor %}
-    </section>
-</div>
+        <div class="memo-description">
+            <p>
+                자유롭게 메모하고 공유하세요! 
+                <br>
+                개인 혹은 단체, 익명의 모두에게 메모를 작성할 수 있습니다.
+            </p>
+            <p>
+                Feel free to write and share!
+                <br>
+                You can write notes for individuals, organizations, and anonymous people.
+            </p>
+        </div>
+        <div class="memo-share-btn">
+            
+        </div>
+    </div>
+</section>
+<!-- card section -->
+<section id="memo-list-card-section">
+    <div class="container">
+        <section class="card-columns">
+        {% for memo in memos %}
+            <div class="card gradient-border">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-9">
+                            <h5 class="card-title">{{ memo.title }}</h5>
+                            <p class="card-subtitle mb-2 text-muted">{{ memo.updated_at }}</p>
+                            <p class="card-subtitle mb-2 text-muted">{{ memo.user }}님의 글</p>
+                        </div>
+                        <div class="col-3 text-center like-field pt-1">
+                            <a href="{% url 'memos:like' memo.id %}">
+                                {% if user in memo.like_users.all %}
+                                <i class="fas fa-heart"></i>
+                                {% else %}
+                                <i class="far fa-heart"></i>
+                                {% endif %}
+                            </a>
+                            <p class="pt-1">좋아요 {{ memo.like_users.count }}개</p>
+                        </div>
+                    </div>
+                    <!-- <span class="badge badge-warning">Health</span> -->
+                    <p class="card-text">{{ memo.content }}</p>
+                    {% if user == memo.user %}
+                    <div class="card-btn">
+                        <a href="{% url 'memos:update' memo.id %}" class="btn btn-outline-secondary btn-sm">수정</a>
+                        <form action="{% url 'memos:delete' memo.id %}" method="POST" class="d-inline">
+                            {% csrf_token %}
+                            <input type="submit" class="btn btn-outline-secondary btn-sm" value="삭제">
+                        </form>
+                    </div>
+                    {% endif %}
+                </div>
+            </div>
+        {% endfor %}
+        </section>
+    </div>
+</section>
+
+<!-- scroll control -->
+<script>
+    var ovf, slider;
+    $(function(){
+        ovf = this.getElementById("memo-list-card-section");
+        slider = this.getElementById("memo-list-info-section");
+        winResize();
+        $(window).bind({resize: winResize, scroll: winScroll});
+    });
+    function winResize(){
+        ovf.style.top = slider.offsetHeight + "px";
+    }
+
+    function winScroll(){
+        var op = 1 - (window.pageYOffset / slider.offsetHeight);
+        slider.style.opacity = op;
+    }
+</script>
 {% endblock body %}

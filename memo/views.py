@@ -51,9 +51,7 @@ def delete(request,memo_id) :
 def like(request,memo_id) :
     memo = get_object_or_404(Memo,pk=memo_id)
     if request.user in memo.like_users.all() :
-        print('좋아요 취소')
         memo.like_users.remove(request.user)
     else :
-        print('좋아요')
         memo.like_users.add(request.user)
     return redirect('memos:list')
