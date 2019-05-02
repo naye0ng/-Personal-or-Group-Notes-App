@@ -4,10 +4,28 @@
 
 {% block body %}
 <div class="container">
-    <form method='POST' >
-    {% csrf_token %}
-    {% bootstrap_form form %}
-    <button type='submit' class='btn btn-primary'>회원가입</button>
-    </form>
+    <div class="row align-items-center h-fix">
+        <div class="col-lg-6">
+            <!-- TODO : 메모장 미리보기 -->
+            <div class="card preview-card">
+                <div class="card-body">
+                    <h5 class="card-title"></h5>
+                    <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
+                    <span class="badge badge-warning">Health</span>
+                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                    <a href="#" class="card-link">Card link</a>
+                    <a href="#" class="card-link">Another link</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-6">
+            <form method='POST' >
+            {% csrf_token %}
+            {% bootstrap_form user_form %}
+            {% bootstrap_form profile_form %}
+            <button type='submit' class='btn btn-primary'>회원가입</button>
+            </form>
+        </div>
+    </div>
 </div>
 {% endblock body %}

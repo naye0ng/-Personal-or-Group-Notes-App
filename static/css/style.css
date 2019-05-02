@@ -6,6 +6,10 @@ html, body {
     background-color: #f6f6f6;
 }
 
+a:hover {
+    text-decoration: none;
+}
+
 .container {
     padding-top:100px;
 }
@@ -18,10 +22,20 @@ html, body {
     border-bottom: 1px solid #ebebeb;
     background-color: rgba(255,255,255,0.9);
 }
-a.navbar-brand {
+.navbar > a {
+    line-height: 0.9rem;
+}
+span.navbae-brand-top{
+    color: #6c757d;
+    font-weight: 500;
+    font-size: 11px;
+    letter-spacing: 2px;
+}
+span.navbar-brand {
     color: #212529;
     font-weight: 600;
-    letter-spacing: 3px;
+    font-size: 18px;
+    letter-spacing: 2.3px;
 }
 
 .btn{
@@ -72,8 +86,8 @@ a.navbar-brand {
 }
 
 .preview-card{
-    width: 350px;
-    height: 420px;
+    width: 400px;
+    /* height: 420px; */
     margin-right: 30px;
     margin-bottom: 50px;
 }
