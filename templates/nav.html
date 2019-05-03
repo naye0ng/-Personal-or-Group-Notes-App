@@ -1,5 +1,5 @@
 {% load static %}
-<nav class="navbar navbar-expand-lg">
+<nav class="navbar navbar-expand-md">
   <a href="{% url 'memos:list' %}">
     <span class="navbar-brand">MOMENT</span>
     <br>
@@ -15,6 +15,9 @@
         <a href="{% url 'memos:create' %}" class="btn my-2 my-sm-0">새 글</a>
       </li>
       {% if user.is_authenticated %}
+      <li class="nav-item active">
+        <a href="{% url 'memos:people' user.id %}" class="btn my-2 my-sm-0">마이페이지</a>
+      </li>
       <li class="nav-item active">
         <a href="{% url 'accounts:logout' %}" class="btn my-2 my-sm-0">로그아웃</a>
       </li>

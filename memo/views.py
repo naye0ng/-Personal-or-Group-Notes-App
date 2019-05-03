@@ -55,3 +55,11 @@ def like(request,memo_id) :
     else :
         memo.like_users.add(request.user)
     return redirect('memos:list')
+
+@login_required
+def people(request,user_id) :
+    # user = get_object_or_404(get_user_model(),pk=user_id)
+    # content = {
+    #     'user' : user,
+    # }
+    return render(request, 'memos/people.html')

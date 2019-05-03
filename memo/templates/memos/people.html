@@ -3,41 +3,46 @@
 {% load static %}
 
 {% block body %}
-<!-- 조회 및 설명 -->
-<section id='memo-list-info-section'>
-    <div class="container pt-100px h-100 d-flex justify-content-center align-items-center">
-    <div class="row text-center">
-        <div class="memo-title col-12">
-            <img src="{% static 'image/memologo.png' %}" alt="" />
-            <br>
-            <br>
+<!-- Profile section -->
+<section id='profile-section'>
+    <div class="container pt-100px h-100 d-flex justify-content-center">
+        <div class="row profile-content">
+            <div class="col-4 align-items-start">
+                <div class="profile-image ml-auto">
+                    {% if user.profile.image %}
+                    <img src="{{ user.profile.image.url }}" alt="">
+                    {% else %}
+                    <img src="{% static 'image/user.png' %}" alt="profile" class="" />
+                    {% endif %}
+                </div>
+            </div>
+            <div class="col-8">
+                <p class="profile-nickname">{{ user.profile.nickname }}</p>
+                <p class="post-liked">
+                    <span>게시물 {{ user.memo_set.all.count }}</span>
+                    <span>좋아요 {{ user.like_memos.all.count }}</span>
+                </p>
+                <p class="profile-description">{{ user.profile.description }}
+                    dsjkjdksjkdjskjdksjdjsjdksjdkjsdkjskdjksjd
+                    dsjkjdksjkdjskjdksjdjsjdksjdkjsdkjskdjksjd
+                </p>
+            </div>
         </div>
-        <div class="memo-description col-12">
-            <p>
-                자유롭게 메모하고 공유하세요! 
-                <br>
-                익명의 사람뿐만 아니라 자신을 위해, 순간의 감정과 기억을 기록하세요.
-            </p>
-            <p>
-                Feel free to write and share!
-                <br>
-                You can write moments of memory and emotion for anonymous people and yourself.
-            </p>
-        </div>
-        <div class="memo-share-btn col-12">
-            <br>
-            <br>
-            <a class="github-button" href="https://github.com/naye0ng" aria-label="Follow @naye0ng on GitHub">Follow</a>
-            <a class="github-button" href="https://github.com/naye0ng/Personal-or-Group-Notes-App" aria-label="Star naye0ng/Personal-or-Group-Notes-App on GitHub">Star</a>
-        </div>
-    </div>
     </div>
 </section>
-<!-- card section -->
-<section id="memo-list-card-section">
-    <div class="container pt-100px">
-        <section class="card-columns">
-        {% for memo in memos %}
+<!-- memo section -->
+<section id="memo-section">
+    <div class="container">
+        <div class="menubar">
+            <a href="" style="font-size:10px;" data-toggle="tooltip" data-placement="top" title="작성한 게시물">
+                <span>POSTS</span>
+            </a>
+            <a href="" data-toggle="tooltip" data-placement="top" title="좋아하는 게시물">
+                <span>LIKED</span>
+            </a>
+        </div>
+        <div class="card-columns">
+        {% for memo in user.memo_set.all %}
             <div class="card gradient-border">
                 <div class="card-body">
                     <div class="row">
@@ -71,16 +76,16 @@
                 </div>
             </div>
         {% endfor %}
-        </section>
+        </div>
     </div>
 </section>
 
-<!-- scroll control -->
 <script>
+    // scroll control
     var ovf, slider;
     $(function(){
-        ovf = this.getElementById("memo-list-card-section");
-        slider = this.getElementById("memo-list-info-section");
+        ovf = this.getElementById("memo-section");
+        slider = this.getElementById("profile-section");
         winResize();
         $(window).bind({resize: winResize, scroll: winScroll});
     });
@@ -92,5 +97,10 @@
         var op = 1 - (window.pageYOffset / slider.offsetHeight);
         slider.style.opacity = op;
     }
+    // Tooltips
+    $(function () {
+        $('[data-toggle="tooltip"]').tooltip()
+    })
 </script>
+
 {% endblock body %}

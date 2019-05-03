@@ -9,4 +9,5 @@ urlpatterns = [
     path('<int:memo_id>/update/',views.update,name='update'),
     path('<int:memo_id>/delete/',views.delete,name='delete'),
     path('<int:memo_id>/like/',views.like,name='like'),
+    path('<int:user_id>/',views.people,name='people'),
 ]
